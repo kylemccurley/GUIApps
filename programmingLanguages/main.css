@@ -1,0 +1,34 @@
+body, .more, .less {
+	background-color: #999900;
+	color: white;
+}
+
+.more, .less {
+	padding: 3px;
+	border-radius: 5px;
+	cursor: pointer;
+	font-style: bold;
+}
+
+.more::before {
+	content: 'Show More';
+}
+
+.less::before {
+	content: 'Show Less';
+}
+
+article {
+  width: 600px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 0 auto;
+  color: black;
+  padding-bottom: 20px;
+}
+
+header h1 {
+  color: white;
+  text-align: center;
+}
