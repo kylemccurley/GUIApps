@@ -8,7 +8,15 @@ todo_items = [
 document.addEventListener('DOMContentLoaded', function() {
 	loadContent();
 	document.querySelectorAll('span').forEach((removeIcon) => {
-	  removeIcon.addEventListener('click', displayModal);
+	  removeIcon.addEventListener('click', function() {
+	  	let listItem = removeIcon.parentNode;
+	  	return displayModal(listItem);
+	  });
+	})
+
+	document.addEventListener('contextmenu', function(e) {
+		e.preventDefault();
+		console.log('Hello')
 	})
 	function loadContent() {
 		let list = document.querySelector('ul');
@@ -25,11 +33,12 @@ document.addEventListener('DOMContentLoaded', function() {
 	  });
 	};
 
-	function displayModal() {
+	function displayModal(target) {
 		let modal = document.createElement('article');
 		let confirmation = document.createElement('p');
 		let yesButton = document.createElement('a');
 		let noButton = document.createElement('a');
+		let list = document.querySelector('ul');
 
 		yesButton.innerHTML = 'Yes';
 		noButton.innerHTML = 'No';
@@ -41,8 +50,21 @@ document.addEventListener('DOMContentLoaded', function() {
 		yesButton.className = 'yes';
 		noButton.className = 'no';
 
+		yesButton.addEventListener('click', function() {
+			list.removeChild(target);
+			hideModal();
+		});
+
+		noButton.addEventListener('click', function() {
+			hideModal();
+		})
+
 		// Add to doc
 		modal.append(yesButton, noButton);
 		document.body.append(modal);
+
+	  function hideModal() {
+	  	document.body.removeChild(modal);
+	  }
 	}
 });
